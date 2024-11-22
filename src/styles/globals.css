@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Ana Renkler */
+  --primary: #9333EA;     /* Purple-600 */
+  --secondary: #4F46E5;   /* Indigo-600 */
+  --background: #111827;  /* Gray-900 */
+  --text-primary: #F3F4F6;/* Gray-100 */
+  --text-secondary: #9CA3AF;/* Gray-400 */
+  
+  /* Vurgu Renkleri */
+  --accent-success: #10B981;
+  --accent-warning: #F59E0B;
+  --accent-error: #EF4444;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text-primary;
+  }
+}
+
+@layer components {
+  .pixel-text {
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 1px;
+    line-height: 1.5;
+  }
+
+  .card {
+    @apply bg-gray-800/50 backdrop-blur-sm border-2 border-pixel border-purple-500/50;
+    @apply rounded-xl p-4;
+    @apply transition-all duration-300;
+    @apply hover:border-purple-500;
+    @apply hover:shadow-lg hover:shadow-purple-500/20;
+    min-height: 200px;
+  }
+
+  .card:hover {
+    @apply transform scale-105;
+  }
+
+  .pixel-button {
+    @apply pixel-text px-4 py-2 bg-purple-600 text-white;
+    @apply transition-all duration-200;
+    @apply text-sm;
+    box-shadow: 0 4px 0 theme('colors.purple.800');
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pixel-button::after {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0 transition-opacity;
+  }
+
+  .pixel-button:hover::after {
+    @apply opacity-10;
+  }
+
+  .pixel-button:active {
+    @apply transform translate-y-1;
+    box-shadow: 0 0 0 theme('colors.purple.800');
+  }
+
+  .badge {
+    @apply px-2 py-1 rounded-md;
+    @apply pixel-text text-xs;
+    @apply bg-purple-500/20 text-purple-400;
+  }
+
+  .nav-link {
+    @apply flex items-center space-x-2 text-text-secondary hover:text-purple-400 transition-colors;
+    @apply pixel-text text-sm;
+  }
+
+  .dex-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto;
+  }
+
+  .pool-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .border-pixel {
+    border-style: solid;
+    border-image-slice: 2;
+    border-width: 4px;
+    image-rendering: pixelated;
+  }
+} 
+
+/* KRAXEL özel animasyonları */
+@keyframes neon-pulse {
+  0%, 100% { 
+    text-shadow: 0 0 7px #9333EA,
+                0 0 10px #9333EA,
+                0 0 21px #9333EA;
+  }
+  50% { 
+    text-shadow: 0 0 14px #9333EA,
+                0 0 20px #9333EA,
+                0 0 42px #9333EA;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
